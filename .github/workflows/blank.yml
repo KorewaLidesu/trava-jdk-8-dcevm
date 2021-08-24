@@ -1,4 +1,4 @@
- name: "build-dcevm manually "
+name: "build-dcevm manually "
 on:
   workflow_dispatch:
     inputs:
