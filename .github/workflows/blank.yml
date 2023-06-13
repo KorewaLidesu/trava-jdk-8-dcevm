@@ -35,9 +35,9 @@ jobs:
       id: cook
       shell: cmd
       run: |
-        export JDK8_BOOT_DIR="$PWD/openjdk-build/jdk-8"
-        export HSWAP_AGENT_DOWNLOAD_URL=https://github.com/HotswapProjects/HotswapAgent/releases/download/RELEASE-1.4.1/hotswap-agent-1.4.1.jar
-        mkdir -p "$JDK8_BOOT_DIR"
+        set JDK8_BOOT_DIR="$PWD/openjdk-build/jdk-8"
+        set HSWAP_AGENT_DOWNLOAD_URL=https://github.com/HotswapProjects/HotswapAgent/releases/download/RELEASE-1.4.1/hotswap-agent-1.4.1.jar
+        mkdir "$JDK8_BOOT_DIR"
         powershell -Command "C:\tools\cygwin\bin\bash.exe -c './build_windows.sh'"; 
     - uses: actions/upload-artifact@v2
       with:
