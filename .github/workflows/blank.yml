@@ -5,11 +5,11 @@ on:
       dcevm_branch:
         description: 'dcevm branch'
         required: true
-        default: 'trava-jdk-8-dcevm'
+        default: 'dcevm8u282b08'
       dcevm_tag:
         description: 'dcevm tag'
         required: true
-        default: 'dcevm8u282b09'
+        default: 'dcevm8u282b08'
 
 jobs:
   dcevm:
