@@ -29,7 +29,11 @@ jobs:
       shell: cmd
       run: |
         choco install cygwin
-        choco install vs2013sdk
+        choco install wget
+        choco install VisualStudio2013Ultimate
+        choco install VS2013.3
+        choco install VS2013.TfsPowerTools
+        choco install VS2013SDK
         C:\\tools\\cygwin\\cygwinsetup.exe -q -P make,unzip,automake,autoconf,zip
         git config --system core.longpaths true; git config --global core.autocrlf false
         unset -v _JAVA_OPTIONS
