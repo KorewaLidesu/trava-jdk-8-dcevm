@@ -19,6 +19,9 @@ jobs:
       matrix:
         os: [windows-2019]
         javaToBuild: [jdk8u]
+    env:
+        OS_BUILD: windows
+
     steps:
     - uses: actions/checkout@v1
     - name: Before cooking
