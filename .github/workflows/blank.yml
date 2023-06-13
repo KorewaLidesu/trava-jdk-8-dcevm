@@ -21,6 +21,8 @@ jobs:
         javaToBuild: [jdk8u]
     env:
         OS_BUILD: windows
+        SOURCE_JDK_BRANCH: ${{ github.event.inputs.dcevm_branch }}
+        SOURCE_JDK_TAG: ${{ github.event.inputs.dcevm_tag }}
 
     steps:
     - uses: actions/checkout@v1
