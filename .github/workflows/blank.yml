@@ -21,14 +21,24 @@ jobs:
         javaToBuild: [jdk8u]
     steps:
     - uses: actions/checkout@v1
-    - uses: TravaOpenJDK/action-build-dcevm@v1
-      id: buildJDK
-      with:
-        impl: dcevm
-        javaToBuild: ${{ matrix.javaToBuild}}
-        dcevm_branch: ${{ github.event.inputs.dcevm_branch }}
-        dcevm_tag: ${{ github.event.inputs.dcevm_tag }}
-    - run: ${{ steps.buildJDK.outputs.BuildJDKDir }}/bin/java -version
+    - name: Before cooking
+      id: before_cook
+      shell: cmd
+      run: |
+        choco install cygwin
+        choco install vs2013sdk
+        C:\\tools\\cygwin\\cygwinsetup.exe -q -P make,unzip,automake,autoconf,zip
+        git config --system core.longpaths true; git config --global core.autocrlf false
+        unset -v _JAVA_OPTIONS
+        git clone --depth 1 --branch travaopenjdk https://github.com/TravaOpenJDK/openjdk-build.git
+    - name: Begin cooking
+      id: cook
+      shell: cmd
+      run: |
+        export JDK8_BOOT_DIR="$PWD/openjdk-build/jdk-8"
+        export HSWAP_AGENT_DOWNLOAD_URL=https://github.com/HotswapProjects/HotswapAgent/releases/download/RELEASE-1.4.1/hotswap-agent-1.4.1.jar
+        mkdir -p "$JDK8_BOOT_DIR"
+        powershell -Command "C:\tools\cygwin\bin\bash.exe -c './build_windows.sh'"; 
     - uses: actions/upload-artifact@v2
       with:
         name: '${{ steps.buildJDK.outputs.JdkPackageFileName }}'
