@@ -35,8 +35,9 @@ jobs:
         choco install VS2013.TfsPowerTools
         choco install VS2013SDK
         C:\\tools\\cygwin\\cygwinsetup.exe -q -P make,unzip,automake,autoconf,zip
-        git config --system core.longpaths true; git config --global core.autocrlf false
-        unset -v _JAVA_OPTIONS
+        git config --system core.longpaths true
+        git config --global core.autocrlf false
+        REG delete “HKCU\Environment” /F /V “_JAVA_OPTIONS”
         git clone --depth 1 --branch travaopenjdk https://github.com/TravaOpenJDK/openjdk-build.git
     - name: Begin cooking
       id: cook
