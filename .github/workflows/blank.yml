@@ -38,6 +38,13 @@ jobs:
         git config --global core.autocrlf false
         REG delete “HKCU\Environment” /F /V “_JAVA_OPTIONS”
         git clone --depth 1 --branch travaopenjdk https://github.com/TravaOpenJDK/openjdk-build.git
+
+    - name: Upload Chocolatey log (if present)
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        # A file, directory or wildcard pattern that describes what to upload
+        path: C:\ProgramData\chocolatey\logs\chocolatey.log
+          
     - name: Begin cooking
       id: cook
       shell: cmd
